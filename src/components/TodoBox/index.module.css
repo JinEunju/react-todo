@@ -1,0 +1,9 @@
+.todoBox {
+    padding: 20px;
+    border-radius: 16px;
+    background: #fff;
+}
+
+.todoBox:not(:last-of-type) {
+    margin-bottom: 20px;
+}

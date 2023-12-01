@@ -1,0 +1,41 @@
+/* LAYOUT */
+.wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    min-height: 100vh;
+    padding: 100px 0;
+    background: skyblue;
+}
+
+.todoListWrap {
+    max-width: 800px;
+    width: 100%;
+    padding: 20px;
+}
+
+.header {
+    margin-bottom: 30px;
+    color: #fff;
+    font-size: 40px;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* TODO ADD */
+.addInput {
+    width: calc(100% - 180px);
+    height: 60px;
+    padding: 6px;
+    font-size: 24px;
+    margin-right: 20px;
+}
+
+.addInput:focus {outline-color: rgb(75, 75, 240);}
+
+.errorMessage {
+    margin-top: 8px;
+    color: red;
+    font-size: 14px;
+}
