@@ -2,7 +2,8 @@ import styles from './index.module.css';
 import Button from '../Button';
 import { useState } from 'react';
 
-const TodoItem = ({ title, content, deleteTodo }) => {
+const TodoItem = ({ data, editTodo, deleteTodo }) => {
+  const { title, content, createAt, updatedAt } = data;
   const [doneTodo, setDoneTodo] = useState(false);
   function completeTodo() {
     setDoneTodo(!doneTodo);
@@ -16,7 +17,7 @@ const TodoItem = ({ title, content, deleteTodo }) => {
         >
           {title}
         </p>
-        <Button size="small" color="blue" onClick={deleteTodo}>수정</Button>
+        <Button size="small" color="blue" onClick={editTodo}>수정</Button>
         <Button size="small" color="red" onClick={deleteTodo}>삭제</Button>
       </div>
       <div className={styles.itemInner}>
@@ -28,11 +29,11 @@ const TodoItem = ({ title, content, deleteTodo }) => {
       <div className={styles.itemInner}>
         <dl className={styles.dateTime}>
           <dt>생성일시</dt>
-          <dd></dd>
+          <dd>{createAt}</dd>
         </dl>
         <dl className={styles.dateTime}>
           <dt>수정일시</dt>
-          <dd></dd>
+          <dd>{updatedAt}</dd>
         </dl>
       </div>
     </li>

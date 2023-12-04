@@ -3,6 +3,7 @@
     height: 60px;
     min-width: 160px;
     padding: 0 20px;
+    vertical-align: top;
 }
 
 .addButton.small {

@@ -29,17 +29,17 @@
     word-break: break-all;
 }
 
-.dateTime{
+.dateTime {
     display: flex;
     align-items: center;
     width: 50%;
 }
 
-.dateTime dt{
+.dateTime dt {
     width: 30%;
     flex-shrink: 0;
 }
 
-.dateTime dd{
+.dateTime dd {
     flex-grow: 1;
 }
