@@ -24,6 +24,7 @@
 }
 
 /* TODO ADD */
+
 .addInput {
     width: calc(100% - 180px);
     height: 60px;
@@ -33,6 +34,19 @@
 }
 
 .addInput:focus {outline-color: rgb(75, 75, 240);}
+
+.todoContentBox {
+    margin-top: 20px;
+    padding: 6px;
+    font-size: 16px;
+}
+
+.addTextarea {
+    width: 100%;
+    height: 200px;
+    padding: 6px;
+    font-size: 16px;
+}
 
 .errorMessage {
     margin-top: 8px;

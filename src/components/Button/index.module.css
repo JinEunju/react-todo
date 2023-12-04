@@ -1,8 +1,3 @@
-.addButton {
-    background: skyblue;
-    color: #fff;
-}
-
 .addButton.large {
     font-size: 24px;
     height: 60px;
@@ -16,4 +11,14 @@
     height: 40px;
     min-width: 40px;
     padding: 0 6px;
+}
+
+.addButton.blue {
+    background: skyblue;
+    color: #fff;
+}
+
+.addButton.red {
+    background: red;
+    color: #fff;
 }

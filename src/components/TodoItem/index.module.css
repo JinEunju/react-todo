@@ -1,18 +1,30 @@
 .item {
     display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-bottom: 2px solid gainsboro;
+}
+
+.itemInner {
+    display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 10px;
     padding: 8px;
-    border-bottom: 2px solid gainsboro;
 }
 
 .item:not(:last-of-type) {margin-bottom: 10px;}
 
-.text {
-    flex-grow: 1; 
+.title {
+    flex-grow: 1;
     font-size: 24px;
     word-break: break-all;
 }
 
-.text.completion {text-decoration: line-through;}
+.title.completion {text-decoration: line-through;}
+
+.content {
+    flex-grow: 1;
+    font-size: 16px;
+    word-break: break-all;
+}

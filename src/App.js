@@ -8,23 +8,25 @@ function App() {
   const [todoCnt, setTodoCnt] = useState(0);
   const [todoList, setTodoList] = useState([]);
   const [todoText, setTodoText] = useState('');
+  const [todoContent, setTodoContent] = useState('');
   const [isError, setIsError] = useState(false);
 
-  const changeValue = ({ target }) => {
+  const changeValue = ({ target, targetValue }) => {
     const { value } = target;
-    setTodoText(value);
+    targetValue(value);
   }
   const addTodo = () => {
     if (todoText) {
       setIsError(false);
       const newTodoItem = {
-        key: todoCnt, 
-        value: todoText
+        key: todoCnt,
+        titleValue: todoText,
+        contentValue: todoContent,
       };
-      
       setTodoList([newTodoItem, ...todoList]);
       setTodoCnt(todoCnt + 1);
       setTodoText('');
+      setTodoContent('');
     } else {
       setIsError(true);
       console.log('ToDo를 입력해주세요');
@@ -47,30 +49,42 @@ function App() {
         <header className={styles.header}>TO DO LIST</header>
         <main>
           <TodoBox>
-            <input 
-              className={styles.addInput}
-              type="text" 
-              placeholder="Task to be done"
-              onChange={changeValue}
-              value={todoText}
-              onKeyUp={keyUpEnter}
-            />
-            <Button size="large" onClick={addTodo}>ADD</Button>
-            {isError && <p className={styles.errorMessage}>ToDo를 입력해주세요</p>}
+            <div className={styles.todoTextBox}>
+              <input
+                className={styles.addInput}
+                type="text"
+                placeholder="Title"
+                onChange={(event) =>changeValue({target: event.target, targetValue: setTodoText})}
+                value={todoText}
+                onKeyUp={keyUpEnter}
+              />
+              <Button size="large" color="blue" onClick={addTodo}>ADD</Button>
+              {isError && <p className={styles.errorMessage}>ToDo Title를 입력해주세요</p>}
+            </div>
+            <div className={styles.todoContentBox}>
+              <textarea
+                className={styles.addTextarea}
+                placeholder="내용을 입력하세요."
+                onChange={(event) =>changeValue({target: event.target, targetValue: setTodoContent})}
+              >
+                  {todoContent}
+              </textarea>
+            </div>
           </TodoBox>
           <TodoBox>
-            {todoList.length > 0 
-            ? <ul className={styles.list}>
+            {todoList.length > 0
+              ? <ul className={styles.list}>
                 {todoList.map(todo => (
-                  <TodoItem 
-                    key={todo.key} 
+                  <TodoItem
+                    key={todo.key}
+                    title={todo.text}
+                    content={todo.content}
                     deleteTodo={() => deleteTodo(todo.key)}
                   >
-                    {todo.value}
                   </TodoItem>
                 ))}
               </ul>
-            : <p>데이터가 없습니다.</p>}
+              : <p>데이터가 없습니다.</p>}
           </TodoBox>
         </main>
       </div>
