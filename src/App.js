@@ -14,9 +14,10 @@ function App() {
   const changeValue = ({ target, targetValue }) => {
     const { value } = target;
     targetValue(value);
+    console.log(target, targetValue)
   }
   const addTodo = () => {
-    if (todoText) {
+    if (todoText && todoContent) {
       setIsError(false);
       const newTodoItem = {
         key: todoCnt,
@@ -66,8 +67,8 @@ function App() {
                 className={styles.addTextarea}
                 placeholder="내용을 입력하세요."
                 onChange={(event) =>changeValue({target: event.target, targetValue: setTodoContent})}
+                defaultValue={todoContent}
               >
-                  {todoContent}
               </textarea>
             </div>
           </TodoBox>

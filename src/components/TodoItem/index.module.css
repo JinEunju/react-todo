@@ -28,3 +28,18 @@
     font-size: 16px;
     word-break: break-all;
 }
+
+.dateTime{
+    display: flex;
+    align-items: center;
+    width: 50%;
+}
+
+.dateTime dt{
+    width: 30%;
+    flex-shrink: 0;
+}
+
+.dateTime dd{
+    flex-grow: 1;
+}

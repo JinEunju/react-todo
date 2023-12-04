@@ -26,11 +26,11 @@ const TodoItem = ({ title, content, deleteTodo }) => {
         </p>
       </div>
       <div className={styles.itemInner}>
-        <dl>
+        <dl className={styles.dateTime}>
           <dt>생성일시</dt>
           <dd></dd>
         </dl>
-        <dl>
+        <dl className={styles.dateTime}>
           <dt>수정일시</dt>
           <dd></dd>
         </dl>
