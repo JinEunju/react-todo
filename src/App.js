@@ -2,23 +2,16 @@ import styles from './app.module.css';
 import TodoBox from './components/TodoBox';
 import TodoItem from './components/TodoItem';
 import Button from './components/Button';
+import Modal from './components/Modal';
 import { useState } from 'react';
+import { formattedDate } from './utils/common'
 
 const initTodoData = {
   title: '',
   content: '',
 };
 
-const formattedDate = () => {
-  const date = new Date();
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, "0");
-  const day = String(date.getDate()).padStart(2, "0");
-  const houre = String(date.getHours()).padStart(2, "0");
-  const minutes = String(date.getMinutes()).padStart(2, "0");
 
-  return `${year}.${month}.${day} ${houre}:${minutes}`;
-}
 
 function App() {
   const [todoCnt, setTodoCnt] = useState(0);
@@ -28,6 +21,7 @@ function App() {
     title: false,
     content: false,
   });
+  const [modalKey, setModalKey] = useState(null);
 
   const changeValue = ({ target, key }) => {
     const { value } = target;
@@ -51,13 +45,23 @@ function App() {
     const newTodoItem = {
       ...todoData,
       key: todoCnt,
-      createAt: formattedDate(),
+      createdAt: formattedDate(),
       updatedAt: '-',
     };
 
     setTodoList([ newTodoItem, ...todoList ]);
     setTodoCnt(todoCnt + 1);
     setTodoData({ ...initTodoData });
+  }
+
+
+  const openModal = (key) => {
+    setModalKey(key);
+    document.body.style.overflow = "hidden";
+  }
+  const closeModal = () => {
+    setModalKey(null);
+    document.body.style.overflow = "auto";
   }
 
   const keyUpEnter = () => window.event.keyCode === 13 && addTodo();
@@ -70,8 +74,13 @@ function App() {
       return newTodoArray;
     })
   }
-  const editTodo = key => {
-    console.log('저장으로 바꿈', key)
+
+  const editTodo = data => {
+    console.log(data);
+    setTodoList(prevList => prevList.map(item => {
+      if (item.key === data.key) return data;
+      return item;
+    }))
   }
 
   return (
@@ -111,7 +120,7 @@ function App() {
                     <TodoItem
                       key={todo.key}
                       data={todo}
-                      editTodo={editTodo}
+                      openModal={openModal}
                       deleteTodo={deleteTodo}
                     >
                     </TodoItem>
@@ -122,42 +131,8 @@ function App() {
           </main>
         </div>
       </div>
-      <div className={styles.modalWrap}>
-        <div className={styles.modalContainer}>
-          <div className={styles.modal}>
-            <div className={styles.modalContent}>
-              <div className={styles.item}>
-                <input 
-                  className={styles.viewInput}
-                  type="text"
-                  placeholder="Title"
-                  value=""
-                  />
-                <Button size="small" color="blue">저장</Button>
-              </div>
-              <div className={styles.item}>
-                <textarea
-                  className={styles.viewContent}
-                  placeholder="Content"
-                  value=""
-                >
-                </textarea>
-              </div>
-              <div className={styles.item}>
-                <dl className={styles.dateTime}>
-                  <dt>생성일시</dt>
-                  <dd></dd>
-                </dl>
-                <dl className={styles.dateTime}>
-                  <dt>수정일시</dt>
-                  <dd></dd>
-                </dl>
-              </div>
-            </div>
-            <button className={styles.closeButton}><span className={styles.closeButtonText}>닫기</span></button>
-          </div>
-        </div>
-      </div>
+      {modalKey !== null 
+      && <Modal closeModal={closeModal} editTodo={editTodo} data={todoList.find(item => item.key === modalKey)} />}
     </>
   );
 }
