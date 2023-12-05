@@ -5,13 +5,18 @@ import Button from './components/Button';
 import Modal from './components/Modal';
 import { useState } from 'react';
 import { formattedDate } from './utils/common'
+import { create } from 'zustand'
+
+const useStore = create((set) => ({
+  bears: 0,
+  increasePopulation: () => set((state) => ({ bears: state.bears + 1 })),
+  removeAllBears: () => set({ bears: 0 }),
+}))
 
 const initTodoData = {
   title: '',
   content: '',
 };
-
-
 
 function App() {
   const [todoCnt, setTodoCnt] = useState(0);
@@ -53,7 +58,6 @@ function App() {
     setTodoCnt(todoCnt + 1);
     setTodoData({ ...initTodoData });
   }
-
 
   const openModal = (key) => {
     setModalKey(key);
