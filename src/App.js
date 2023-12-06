@@ -5,13 +5,7 @@ import Button from './components/Button';
 import Modal from './components/Modal';
 import { useState } from 'react';
 import { formattedDate } from './utils/common'
-import { create } from 'zustand'
-
-const useStore = create((set) => ({
-  bears: 0,
-  increasePopulation: () => set((state) => ({ bears: state.bears + 1 })),
-  removeAllBears: () => set({ bears: 0 }),
-}))
+import { todoListStore } from './stores/todoListStore'
 
 const initTodoData = {
   title: '',
